@@ -82,8 +82,13 @@ def test_rand_angle_spread_deg():
 
 
 def test_rand_vec_spread_deg():
-    """Smoke test"""
-    rand_vec_spread_deg(-45.0, 5.0, 3.3)
+    for angle in (-45.0, 0.0, 90.0, 180.0):
+        for _ in range(100):
+            x, y = rand_vec_spread_deg(angle, 5.0, 3.3)
+            assert math.hypot(x, y) == approx(3.3)
+            # Wrap the difference into [-180, 180) so e.g. 179 vs -179 is 2 degrees apart
+            diff = (math.degrees(math.atan2(y, x)) - angle + 180.0) % 360.0 - 180.0
+            assert abs(diff) <= 5.0 + 1e-9
 
 
 def test_rand_vec_magnitude():

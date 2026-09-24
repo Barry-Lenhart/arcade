@@ -5,6 +5,9 @@ Arcade [PyPi Release History](https://pypi.org/project/arcade/#history) page.
 
 ## Unreleased
 
+### Fixes
+- Fixed `arcade.math.rand_vec_spread_deg` passing its angle in degrees to `Vec2.from_polar`, which expects radians. The returned vector now points within the requested spread instead of in an effectively random direction. See [#2648](https://github.com/pythonarcade/arcade/issues/2648).
+
 ### Misc Changes
 - Updated the optional `pymunk` extra to 7.3.0 (from 7.2.0). Packaging-only release (free-threaded CPython and pyodide wheels, improved type hints) with no breaking changes or deprecations.
 
